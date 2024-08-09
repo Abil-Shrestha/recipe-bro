@@ -54,7 +54,7 @@ const RecipeView = ({recipe}: {recipe: Recipe | PartialRecipe}) => {
         <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 p-2 items-start flex justify-center">
           {recipe?.name || "Untitled Recipe"}
         </h2>
-        <div className="flex flex-row gap-4 text-sm text-zinc-600 dark:text-zinc-400 justify-center bg-zinc-300 dark:bg-zinc-700 font-semibold">
+        <div className="flex flex-row gap-4 text-sm text-zinc-600 dark:text-zinc-400 justify-center bg-zinc-300 dark:bg-zinc-700 font-semibold rounded-lg">
           <span>{recipe.cuisine || "Unknown"} Cuisine</span>
           <span>Difficulty: {recipe.difficulty || "N/A"}</span>
           <span>Prep: {recipe.prepTime || "N/A"} min</span>

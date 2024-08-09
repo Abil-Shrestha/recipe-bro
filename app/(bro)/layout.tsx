@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Metadata } from "next";
 import { Toaster } from "sonner";
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://recipe-bro.vercel.app"),
@@ -19,6 +20,7 @@ export default function RootLayout({
         <Toaster position="top-center" richColors />
         {children}
       </body>
+      <Analytics />
     </html>
   );
 }
