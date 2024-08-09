@@ -93,15 +93,9 @@ export default function Home() {
           </div>
         ) : (
           <motion.div className="h-full px-4 w-full md:w-[600px] md:px-0 pt-20">
-            <div className="border rounded-lg p-6 flex flex-col gap-4 text-zinc-500 text-sm dark:text-zinc-400 dark:border-zinc-700">
-              <p className="flex flex-row justify-center gap-4 items-center text-zinc-900 dark:text-zinc-50"></p>
-              <p>
-                The useObject hook allows you to create interfaces that
-                represent a structured JSON object that is being streamed.
-              </p>
+            <div className="border rounded-lg p-6 flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 dark:border-zinc-700  text-lg justify-center items-center">
               <p>
                 Enter a recipe idea and recipe bro will generate it for you.
-                (structured output test)
               </p>
               <p>
                 Learn more about the{" "}
@@ -113,6 +107,16 @@ export default function Home() {
                   useObject{" "}
                 </Link>
                 hook from Vercel AI SDK.
+              </p>{" "}
+              <p>
+                Check out the{" "}
+                <Link
+                  className="text-blue-500 dark:text-blue-400"
+                  href="https://github.com/Abil-Shrestha/recipe-bro"
+                  target="_blank"
+                >
+                  Source Code
+                </Link>
               </p>
             </div>
           </motion.div>
