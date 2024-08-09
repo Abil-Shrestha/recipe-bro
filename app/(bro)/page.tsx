@@ -25,18 +25,12 @@ export default function Home() {
     schema: recipeSchema,
     onFinish({object}) {
       console.log("onFinish called with object:", object);
-      if (
-        object &&
-        object.recipe &&
-        object.recipe?.ingredients &&
-        object.recipe?.nutritionalInfo
-      ) {
-        console.log("Setting recipes with:", object);
+      if (object) {
         setRecipes((prev) => [object.recipe, ...prev]);
         setInput("");
         inputRef.current?.focus();
       } else {
-        console.log("Object is null or undefined");
+        console.error("Object is null or undefined");
       }
     },
     onError: (error) => {
@@ -57,7 +51,6 @@ export default function Home() {
             event.preventDefault();
             const form = event.target as HTMLFormElement;
             const input = form.elements.namedItem("recipe") as HTMLInputElement;
-            console.log(input.value);
             if (input.value.trim()) {
               submit({recipe: input.value});
             }
@@ -95,7 +88,7 @@ export default function Home() {
           <motion.div className="h-full px-4 w-full md:w-[600px] md:px-0 pt-20">
             <div className="border rounded-lg p-6 flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 dark:border-zinc-700  text-lg justify-center items-center">
               <p>
-                Enter a recipe idea and recipe bro will generate it for you.
+                Enter a recipe idea and recipe bro will generate it.
               </p>
               <p>
                 Learn more about the{" "}

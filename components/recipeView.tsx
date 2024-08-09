@@ -45,11 +45,10 @@ const RecipeView = ({recipe}: {recipe: Recipe | PartialRecipe}) => {
     return (
       <motion.div
         className="flex flex-col gap-4 px-4 w-full md:w-[600px] h-fit md:px-0 dark:bg-zinc-800 bg-zinc-200 rounded-lg"
-        initial={{opacity: 0.1}}
+        initial={{opacity: 0.7}}
         animate={{opacity: 1}}
         transition={{
-          type: "tween",
-          duration: 0.2,
+          duration: 0.4,
         }}
       >
         <h2 className="text-2xl font-bold text-zinc-800 dark:text-zinc-200 p-2 items-start flex justify-center">
