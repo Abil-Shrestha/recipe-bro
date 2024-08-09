@@ -58,7 +58,7 @@ export default function Home() {
         >
           <input
             name="recipe"
-            className="bg-zinc-100 rounded-md px-2 py-1.5 w-full outline-none dark:bg-zinc-700 text-zinc-800 dark:text-zinc-300 md:max-w-[600px] max-w-[calc(100dvw-32px)] disabled:text-zinc-400 disabled:cursor-not-allowed placeholder:text-zinc-400"
+            className="bg-zinc-100 rounded-md px-2 py-2 w-full outline-none dark:bg-zinc-700 text-zinc-800 dark:text-zinc-300 md:max-w-[600px] max-w-[calc(100dvw-32px)] disabled:text-zinc-400 disabled:cursor-not-allowed placeholder:text-zinc-400 mt-4"
             placeholder="Enter a recipe idea..."
             value={input}
             onChange={(event) => {
