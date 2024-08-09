@@ -1,5 +1,3 @@
-## Recipe bro will let you cook
+## Testing Vercel AI adk + Structured output + UseObject experimental, feel free to fork the code and play around!
 
-To learn more about Vercel AI SDK or Next.js take a look at the following resources:
-
-<img src="app/recipe_bro.png" alt="Recipe Bro" />
+<img src="https://github.com/Abil-Shrestha/recipe-bro/blob/main/app/(bro)/recipe_bro.png" alt="Recipe Bro" />]
