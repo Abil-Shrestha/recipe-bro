@@ -11,20 +11,40 @@ import {motion} from "framer-motion";
 import {toast} from "sonner";
 import Link from "next/link";
 import {Recipe, recipeSchema, PartialRecipe} from "@/app/api/chat/schema";
+import {sarcasticResponses} from "./responses.js";
 
 import RecipeView from "@/components/recipeView";
 
 export default function Home() {
   const [input, setInput] = useState<string>("");
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [isValidating, setIsValidating] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  async function validateDish(recipe) {
+    try {
+      const response = await fetch("/api/isValidDish", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({recipe: recipe}),
+      });
+      const data = await response.json();
+      // console.log(data.isValid);
+      return data.isValid;
+    } catch (error) {
+      console.error("Error validating dish:", error);
+      return false;
+    }
+  }
 
   const {submit, isLoading, object} = experimental_useObject({
     api: "/api/chat",
     schema: recipeSchema,
     onFinish({object}) {
-      console.log("onFinish called with object:", object);
+      // console.log("onFinish called with object:", object);
       if (object) {
         setRecipes((prev) => [object.recipe, ...prev]);
         setInput("");
@@ -47,12 +67,25 @@ export default function Home() {
       <div className="flex flex-col justify-between gap-4">
         <form
           className="flex flex-col gap-2 relative items-center"
-          onSubmit={(event) => {
+          onSubmit={async (event) => {
             event.preventDefault();
             const form = event.target as HTMLFormElement;
             const input = form.elements.namedItem("recipe") as HTMLInputElement;
             if (input.value.trim()) {
-              submit({recipe: input.value});
+              setIsValidating(true);
+              const isValid = await validateDish(input.value);
+              setIsValidating(false);
+
+              if (isValid) {
+                submit({recipe: input.value});
+              } else {
+                setInput("");
+                const randomResponse =
+                  sarcasticResponses[
+                    Math.floor(Math.random() * sarcasticResponses.length)
+                  ];
+                toast.error(randomResponse);
+              }
             }
           }}
         >
@@ -64,7 +97,7 @@ export default function Home() {
             onChange={(event) => {
               setInput(event.target.value);
             }}
-            disabled={isLoading}
+            disabled={isLoading || isValidating}
             ref={inputRef}
           />
         </form>
@@ -87,9 +120,7 @@ export default function Home() {
         ) : (
           <motion.div className="h-full px-4 w-full md:w-[600px] md:px-0 pt-20">
             <div className="border rounded-lg p-6 flex flex-col gap-4 text-zinc-500 dark:text-zinc-400 dark:border-zinc-700  text-lg justify-center items-center">
-              <p>
-                Enter a recipe idea and recipe bro will generate it.
-              </p>
+              <p>Enter a recipe idea and recipe bro will generate it.</p>
               <p>
                 Learn more about the{" "}
                 <Link
